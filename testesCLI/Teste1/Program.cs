@@ -1,4 +1,5 @@
 ﻿using System;
+using NetFwTypeLib;
 
 namespace Teste1
 {
@@ -6,18 +7,20 @@ namespace Teste1
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            // Located in FirewallAPI.dll
+            ...
+INetFwRule firewallRule = (INetFwRule)Activator.CreateInstance(
+    Type.GetTypeFromProgID("HNetCfg.FWRule"));
+            firewallRule.Action = NET_FW_ACTION_.NET_FW_ACTION_BLOCK;
+            firewallRule.Description = "Used to block all internet access.";
+            firewallRule.Direction = NET_FW_RULE_DIRECTION_.NET_FW_RULE_DIR_OUT;
+            firewallRule.Enabled = true;
+            firewallRule.InterfaceTypes = "All";
+            firewallRule.Name = "Block Internet";
 
-            Calcula(2, 3);
-        }
-
-        private static void Calcula(int v1, int v2)
-        {
-            var total = 0;
-            total = v1 + v2;
-            Console.WriteLine(total);
-
-
+            INetFwPolicy2 firewallPolicy = (INetFwPolicy2)Activator.CreateInstance(
+                Type.GetTypeFromProgID("HNetCfg.FwPolicy2"));
+            firewallPolicy.Rules.Add(firewallRule);
 
         }
     }
