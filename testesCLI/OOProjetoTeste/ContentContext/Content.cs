@@ -5,9 +5,12 @@ namespace OOProjetoTeste.ContentContext
 
     public abstract class Content
     {
-        public Content()
+        public Content(string title, string url)
         {
-            Id = new Guid();
+
+            Id = Guid.NewGuid();
+            Title = title;
+            Url = url;
         }
         public Guid Id { get; set; }
         public string Title { get; set; }

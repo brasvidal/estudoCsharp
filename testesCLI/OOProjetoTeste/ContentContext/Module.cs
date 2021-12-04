@@ -10,7 +10,8 @@ namespace OOProjetoTeste.ContentContext
         public string Title { get; set; }
         public IList<Lecture> Lectures { get; set; }
 
-        public Module() => Lectures = new List<Lecture>();
+        public Module(string title, string url)
+        : base(title, url) => Lectures = new List<Lecture>();
     }
 
 }
