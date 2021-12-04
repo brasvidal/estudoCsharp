@@ -4,7 +4,7 @@ namespace OOProjetoTeste.ContentContext
 {
 
 
-    public class Module : Content
+    public class Module : Base
     {
         public int Order { get; set; }
         public string Title { get; set; }
