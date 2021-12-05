@@ -3,32 +3,25 @@ using Blog.Models;
 using Microsoft.Data.SqlClient;
 using Dapper;
 using Dapper.Contrib.Extensions;
+using Blog.Repositories;
 
 namespace blog
 {
     class Program
     {
-        private const string CONNECTION_STRING = @"Server=Localhost,1433
-        ;Database=Blog,User ID=sa;Password=na0lembr0";
+        private const string CONNECTION_STRING = @"Server=Localhost,1433;Database=Blog;User Id=sa;Password=na0lembr0;Encrypt=False;TrustServerCertificate=False";
         static void Main(string[] args)
         {
+            var repository = new UserRepository();
+
+            repository.Get();
+            var users = repository.Get();
+
             Console.WriteLine("Hello World!");
-            ReadUsers();
+
         }
 
 
 
-        public static void ReadUsers()
-        {
-            using (var connection = new SqlConnection(CONNECTION_STRING))
-            {
-                var users = connection.GetAll<User>();
-
-                foreach (var user in users)
-                {
-                    Console.WriteLine(user.Name);
-                }
-            }
-        }
     }
 }
